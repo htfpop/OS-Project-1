@@ -11,3 +11,4 @@ public class SJF {
         System.out.printf("SJF: %.5f",FCFS.handleFCFS(jobTime));
     }
 }
+//comment
