@@ -18,10 +18,17 @@ public class Jobs implements Comparable<Jobs>{
     public int getJobTime(){return this.jobTime;}
     public boolean isComplete(){return this.jobCompleted;}
 
-    public void processJob(){
-        jobTime--;
-        if(jobTime == 0)
+    public int processJob(int splitTime){
+        if(this.jobTime <= splitTime){
+            int returnTime = this.jobTime;
+            this.jobTime = 0;
             jobCompleted = true;
+            return returnTime;
+        }
+        else {
+            jobTime -= splitTime;
+            return jobTime;
+        }
     }
 
     @Override

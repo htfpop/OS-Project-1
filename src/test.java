@@ -8,10 +8,20 @@ public class test {
         //System.out.printf("Hello World!");
 
         //initTest1();
-        HashMap jobMap = initTest3();
-        System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS(jobMap));
+        //HashMap jobMap = initTest3();
+        //System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS(jobMap));
 
-        SJF.processSJF(jobMap);
+        //SJF.processSJF(jobMap);
+        //RoundRobin.handleRR(jobMap, 3);
+        HashMap<Integer, Jobs> myMap = new HashMap();
+        myMap.put(0,new Jobs("Job1",0,false));
+        myMap.put(1,new Jobs("Job2",5,false));
+        myMap.put(2,new Jobs("Job3",8,false));
+        myMap.put(3,new Jobs("Job4",11,false));
+        myMap.put(4,new Jobs("Job5",15, false));
+        RoundRobin.handleRR(myMap,3);
+        //SJF.processSJF(myMap);
+        //System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS(myMap));
 
     }
 
