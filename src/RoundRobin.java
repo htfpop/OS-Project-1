@@ -38,17 +38,6 @@ public class RoundRobin {
 
         System.out.printf("Average RTT: %.5f\r\n",RTT);
 
-//            if(currentJob.isComplete()) {
-//                System.out.printf("%s Completed\r\n",currentJob.getJobNum());
-//                numJobsLeft--;
-//            }
-//            else
-//                jobLL.offer(currentJob);
-//
-//        }
     }
 
-    public static void prettyPrint(Jobs currentJob){
-
-    }
 }
