@@ -6,7 +6,10 @@ public class test {
     private static final int NUMJOBS = 29;
     public static void main(String[] args){
         //System.out.printf("Hello World!");
-
+        if(args.length < 0){
+            System.out.println("IO Error. No program arguments");
+            System.exit(-1);
+        }
         //initTest1();
         //HashMap jobMap = initTest3();
         //System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS(jobMap));
@@ -62,8 +65,8 @@ public class test {
         }
 
         String serviceTime = "";
-        for(int i = 0; i < arrList.size(); i++){
-            serviceTime += arrList.get(i) + " ";
+        for (Integer integer : arrList) {
+            serviceTime += integer + " ";
         }
         System.out.printf("%s\r\n%s\r\n",zeros,serviceTime);
 
