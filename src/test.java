@@ -1,5 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -7,16 +7,18 @@ import java.util.Scanner;
 
 public class test {
     private static final int NUMJOBS = 29;
-    public static void main(String[] args) throws FileNotFoundException {
-        //System.out.printf("Hello World!");
+    public static void main(String[] args) throws IOException {
+
         if(args.length < 0){
             System.out.println("IO Error. No program arguments");
             System.exit(-1);
         }
 
-        HashMap<Integer,Jobs> joblist = testFCFS();
+        initFiles();
 
-        System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS((joblist)));
+        //HashMap<Integer,Jobs> joblist = testFCFS();
+
+        //System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS((joblist)));
 
         //initTest1();
         //HashMap jobMap = initTest3();
@@ -122,6 +124,47 @@ public class test {
     private static void printHashMap(HashMap x){
         for(int i = 0; i < x.size(); i++){
             System.out.printf("%d: %s, %d ms, %b\r\n", i, ((Jobs) x.get(i)).getJobNum(), ((Jobs) x.get(i)).getJobTime(), ((Jobs) x.get(i)).isComplete());
+        }
+    }
+
+    private static void initFiles() throws IOException {
+        Random rd = new Random();
+        String head = ".\\testing";
+
+        for(int i = 0; i < 15; i++){
+           String currFile = head+"\\test5\\job"+ i +".txt";
+            FileWriter fw = new FileWriter(currFile);
+            PrintWriter pw = new PrintWriter(fw);
+
+            for(int j = 0; j < 5; j++){
+                String outText = "Job"+ (j+1) +"\n" + rd.nextInt(16) + "\n";
+                pw.write(outText);
+            }
+            pw.close();
+        }
+
+        for(int i = 0; i < 15; i++){
+            String currFile = head+"\\test10\\job"+ i +".txt";
+            FileWriter fw = new FileWriter(currFile);
+            PrintWriter pw = new PrintWriter(fw);
+
+            for(int j = 0; j < 10; j++){
+                String outText = "Job"+ (j+1) +"\n" + rd.nextInt(16) + "\n";
+                pw.write(outText);
+            }
+            pw.close();
+        }
+
+        for(int i = 0; i < 15; i++){
+            String currFile = head+"\\test15\\job"+ i +".txt";
+            FileWriter fw = new FileWriter(currFile);
+            PrintWriter pw = new PrintWriter(fw);
+
+            for(int j = 0; j < 15; j++){
+                String outText = "Job"+ (j+1) +"\n" + rd.nextInt(16) + "\n";
+                pw.write(outText);
+            }
+            pw.close();
         }
     }
 }
