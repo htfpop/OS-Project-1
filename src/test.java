@@ -1,9 +1,6 @@
 import java.io.*;
 import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class test {
     private static final int NUMJOBS = 29;
@@ -14,7 +11,13 @@ public class test {
             System.exit(-1);
         }
 
-        initFiles();
+        HashMap<Integer, Jobs> jobList = getInput("./testing/test10/job0.txt");
+        HashMap<Integer, Jobs> jobList2 = getInput("./testing/test10/job0.txt");
+        System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS(jobList));
+        SJF.processSJF(jobList);
+        RoundRobin.handleRR(jobList,2);
+        RoundRobin.handleRR(jobList2,5);
+        //initFiles();
 
         //HashMap<Integer,Jobs> joblist = testFCFS();
 
@@ -62,9 +65,16 @@ public class test {
         Scanner fileScanner = new Scanner(file);
         HashMap<Integer, Jobs> jobList = new HashMap<>();
         int counter = 0;
+        String name= "";
+        int time = 0;
         while(fileScanner.hasNextLine()){
-            String name = fileScanner.next();
-            int time = fileScanner.nextInt();
+            try {
+                name = fileScanner.next();
+                time = fileScanner.nextInt();
+            }catch(NoSuchElementException e){
+                fileScanner.close();
+                return jobList;
+            }
             jobList.put(counter++, new Jobs(name,time,false));
         }
         fileScanner.close();
@@ -132,7 +142,7 @@ public class test {
         String head = ".\\testing";
 
         for(int i = 0; i < 15; i++){
-           String currFile = head+"\\test5\\job"+ i +".txt";
+            String currFile = head+"\\test5\\job"+ i +".txt";
             FileWriter fw = new FileWriter(currFile);
             PrintWriter pw = new PrintWriter(fw);
 
