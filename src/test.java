@@ -1,46 +1,158 @@
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class test {
     private static final int NUMJOBS = 29;
     public static void main(String[] args) throws IOException {
 
-        if(args.length < 0){
-            System.out.println("IO Error. No program arguments");
-            System.exit(-1);
-        }
+        /*
+        HashMap<Integer, Jobs> jobList = getInput("./testFiles/test10/job0.txt");
+        HashMap<Integer, Jobs> jobList2 = getInput("./testFiles/test10/job0.txt");
+        //System.out.printf("FCFS: %.3f\r\n",FCFS.processFCFS(jobList));
+        //System.out.printf("SJF: %f\r\n",SJF.processSJF(jobList));
+        RoundRobin2.processRoundRobin2(jobList);
+        RoundRobin5.processRoundRobin5(jobList2);
+         */
 
-        HashMap<Integer, Jobs> jobList = getInput("./testing/test10/job0.txt");
-        HashMap<Integer, Jobs> jobList2 = getInput("./testing/test10/job0.txt");
-        System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS(jobList));
-        SJF.processSJF(jobList);
-        RoundRobin.handleRR(jobList,2);
-        RoundRobin.handleRR(jobList2,5);
+        //HashMap<Integer, Jobs> fcfs = getInput("./testFiles/test15/job3.txt");
+        //HashMap<Integer, Jobs> sjf = getInput("./testFiles/test15/job3.txt");
+        //HashMap<Integer, Jobs> rr2 = getInput("./testFiles/test15/job3.txt");
+        //HashMap<Integer, Jobs> rr5 = getInput("./testFiles/test15/job3.txt");
+
+        //System.out.printf("FCFS ATT: %.3f\r\n",FCFS.processFCFS(fcfs));
+        //System.out.printf("SJF ATT: %.3f\r\n",SJF.processSJF(sjf));
+        //RoundRobin2.processRoundRobin2(rr2);
+        //RoundRobin5.processRoundRobin5(rr5);
+
+        averageAverageTrials();
+
         //initFiles();
+    }
 
-        //HashMap<Integer,Jobs> joblist = testFCFS();
+    public static void averageAverageTrials() throws FileNotFoundException {
+        double fcfsTimes = 0;
+        double sjfTimes = 0;
+        double rr2Times = 0;
+        double rr5Times = 0;
 
-        //System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS((joblist)));
+        List<Double>fcfsList = new ArrayList<>();
+        List<Double>sjfList = new ArrayList<>();
+        List<Double>rr2List = new ArrayList<>();
+        List<Double>rr5List = new ArrayList<>();
 
-        //initTest1();
-        //HashMap jobMap = initTest3();
-        //System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS(jobMap));
+        String currentDir = "./testFiles/";
 
-        //SJF.processSJF(jobMap);
-        //RoundRobin.handleRR(jobMap, 3);
-//        HashMap<Integer, Jobs> myMap = new HashMap();
-//        myMap.put(0,new Jobs("Job1",3,false));
-//        myMap.put(1,new Jobs("Job2",16,false));
-//        myMap.put(2,new Jobs("Job3",2,false));
-//        myMap.put(3,new Jobs("Job4",24,false));
-//        myMap.put(4,new Jobs("Job5",22, false));
-//        RoundRobin.handleRR(myMap,5);
-        //SJF.processSJF(myMap);
-        //System.out.printf("FCFS: %.3f\r\n",FCFS.handleFCFS(myMap));
+        for(int i = 0; i < 20; i++) {
+            String currFile = currentDir + "test5/job" + i + ".txt";
+            HashMap<Integer, Jobs> fcfs = getInput(currFile);
+            HashMap<Integer, Jobs> sjf = getInput(currFile);
+            HashMap<Integer, Jobs> rr2 = getInput(currFile);
+            HashMap<Integer, Jobs> rr5 = getInput(currFile);
+            /*
+            fcfsTimes += FCFS.processFCFS(fcfs);
+            sjfTimes += SJF.processSJF(sjf);
+            rr2Times += RoundRobin2.processRoundRobin2(rr2);
+            rr5Times += RoundRobin5.processRoundRobin5(rr5);
 
-        //HashMap<Integer, Jobs> jobList = getInput(args[0]);
-        //RoundRobin.handleRR(jobList,5);
+            fcfsList.add(FCFS.processFCFS(fcfs));
+            sjfList.add(SJF.processSJF(sjf));
+            rr2List.add(RoundRobin2.processRoundRobin2(rr2));
+            rr5List.add(RoundRobin5.processRoundRobin5(rr5));
+             */
+        }
+        /*
+        System.out.println("FCFS Times");
+        for(double d:fcfsList){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nSJF Times");
+        for(double d:sjfList){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nRR2 Times");
+        for(double d:rr2List){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nRR5 Times");
+        for(double d:rr5List){
+            System.out.printf("%f\r\n",d);
+        }
+         */
+
+        fcfsTimes = 0; sjfTimes = 0; rr2Times = 0; rr5Times = 0;
+
+        for(int i = 0; i < 20; i++) {
+            String currFile = currentDir + "test10/job" + i + ".txt";
+            HashMap<Integer, Jobs> fcfs = getInput(currFile);
+            HashMap<Integer, Jobs> sjf = getInput(currFile);
+            HashMap<Integer, Jobs> rr2 = getInput(currFile);
+            HashMap<Integer, Jobs> rr5 = getInput(currFile);
+            /*
+            fcfsTimes += FCFS.processFCFS(fcfs);
+            sjfTimes += SJF.processSJF(sjf);
+            rr2Times += RoundRobin2.processRoundRobin2(rr2);
+            rr5Times += RoundRobin5.processRoundRobin5(rr5);
+
+            fcfsList.add(FCFS.processFCFS(fcfs));
+            sjfList.add(SJF.processSJF(sjf));
+            rr2List.add(RoundRobin2.processRoundRobin2(rr2));
+            rr5List.add(RoundRobin5.processRoundRobin5(rr5));
+             */
+        }
+        /*
+        System.out.println("FCFS Times");
+        for(double d:fcfsList){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nSJF Times");
+        for(double d:sjfList){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nRR2 Times");
+        for(double d:rr2List){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nRR5 Times");
+        for(double d:rr5List){
+            System.out.printf("%f\r\n",d);
+        }
+         */
+
+        fcfsTimes = 0; sjfTimes = 0; rr2Times = 0; rr5Times = 0;
+
+        for(int i = 0; i < 20; i++) {
+            String currFile = currentDir + "test15/job" + i + ".txt";
+            HashMap<Integer, Jobs> fcfs = getInput(currFile);
+            HashMap<Integer, Jobs> sjf = getInput(currFile);
+            HashMap<Integer, Jobs> rr2 = getInput(currFile);
+            HashMap<Integer, Jobs> rr5 = getInput(currFile);
+            /*
+            fcfsTimes += FCFS.processFCFS(fcfs);
+            sjfTimes += SJF.processSJF(sjf);
+            rr2Times += RoundRobin2.processRoundRobin2(rr2);
+            rr5Times += RoundRobin5.processRoundRobin5(rr5);
+             */
+            fcfsList.add(FCFS.processFCFS(fcfs));
+            sjfList.add(SJF.processSJF(sjf));
+            rr2List.add(RoundRobin2.processRoundRobin2(rr2));
+            rr5List.add(RoundRobin5.processRoundRobin5(rr5));
+        }
+        System.out.println("FCFS Times");
+        for(double d:fcfsList){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nSJF Times");
+        for(double d:sjfList){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nRR2 Times");
+        for(double d:rr2List){
+            System.out.printf("%f\r\n",d);
+        }
+        System.out.println("\nRR5 Times");
+        for(double d:rr5List){
+            System.out.printf("%f\r\n",d);
+        }
     }
 
     public static HashMap<Integer,Jobs> testFCFS(){
@@ -51,11 +163,6 @@ public class test {
         jobList.put(2, new Jobs("Job3",2,false));
         jobList.put(3, new Jobs("Job4",24,false));
         jobList.put(4, new Jobs("Job5",22,false));
-//        jobList.put(5, new Jobs("Job6",13,false));
-//        jobList.put(6, new Jobs("Job7",2,false));
-//        jobList.put(7, new Jobs("Job8",25,false));
-//        jobList.put(8, new Jobs("Job9",4,false));
-//        jobList.put(9, new Jobs("Job10",24,false));
 
         return jobList;
     }
@@ -139,39 +246,39 @@ public class test {
 
     private static void initFiles() throws IOException {
         Random rd = new Random();
-        String head = ".\\testing";
+        String head = ".\\testFiles";
 
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 20; i++){
             String currFile = head+"\\test5\\job"+ i +".txt";
             FileWriter fw = new FileWriter(currFile);
             PrintWriter pw = new PrintWriter(fw);
 
             for(int j = 0; j < 5; j++){
-                String outText = "Job"+ (j+1) +"\n" + rd.nextInt(16) + "\n";
+                String outText = "Job"+ (j+1) +"\n" + (rd.nextInt(20)+1) + "\n";
                 pw.write(outText);
             }
             pw.close();
         }
 
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 20; i++){
             String currFile = head+"\\test10\\job"+ i +".txt";
             FileWriter fw = new FileWriter(currFile);
             PrintWriter pw = new PrintWriter(fw);
 
             for(int j = 0; j < 10; j++){
-                String outText = "Job"+ (j+1) +"\n" + rd.nextInt(16) + "\n";
+                String outText = "Job"+ (j+1) +"\n" + (rd.nextInt(20)+1) + "\n";
                 pw.write(outText);
             }
             pw.close();
         }
 
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 20; i++){
             String currFile = head+"\\test15\\job"+ i +".txt";
             FileWriter fw = new FileWriter(currFile);
             PrintWriter pw = new PrintWriter(fw);
 
             for(int j = 0; j < 15; j++){
-                String outText = "Job"+ (j+1) +"\n" + rd.nextInt(16) + "\n";
+                String outText = "Job"+ (j+1) +"\n" + (rd.nextInt(20)+1) + "\n";
                 pw.write(outText);
             }
             pw.close();
